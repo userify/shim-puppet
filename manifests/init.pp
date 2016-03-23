@@ -14,7 +14,7 @@ class userify(
       self_signed=${self_signed} \
       api_id=\"${api_id}\" \
       api_key=\"${api_key}\" \
-      sudo -sE"
+      /bin/sh",
     creates => '/opt/userify/shim.sh',
     path    => ['/usr/bin', '/usr/sbin']
   }
