@@ -22,7 +22,7 @@ class userify(
       api_key=\"${api_key}\" \
       /bin/sh",
     creates => '/opt/userify/shim.sh',
-    path    => ['/usr/bin', '/usr/sbin']
+    path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin']
   }
 
 }
