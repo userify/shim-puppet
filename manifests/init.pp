@@ -13,6 +13,26 @@ class userify(
     $insecure = ''
   }
 
+  File {
+    owner => 'root',
+    group => 'root'
+  }
+
+  file { '/opt/userify':
+    ensure => directory,
+    mode   => '0700'
+  } ->
+
+  # This is used in case userify is laid down already and the configuration
+  # changes for whatever reason, the idea is this file will then change and
+  # the notify will cause a re-install/setup of userify below
+  file { '/opt/userify/.userify-config':
+    ensure  => present,
+    mode    => '0400',
+    content => template('userify/userify-config.erb'),
+    notify  => Exec['userify']
+  }
+
   exec { 'userify':
     command => "curl -sS1 ${insecure} \"https://${static_host}/installer.sh\" | \
       static_host=\"${static_host}\" \
