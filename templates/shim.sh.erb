@@ -1,5 +1,0 @@
-#! /bin/bash +e
-
-[ -z "$PYTHON" ] && PYTHON="$(which python)"
-output=$(curl -Ss https://shim.userify.com/shim.py | $PYTHON 2>&1)
-echo "$output" >> /var/log/userify.log
